@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend:/usr/app
+      - ./backend/node_modules:/usr/app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+    env_file:
+      .env.dev
+  db:
+    image: mongo
+    restart: unless-stopped
+    volumes:
+      - db_data:/data/db
+    env_file:
+      .env.dev
+volumes:
+  db_data:
