@@ -9,16 +9,24 @@ services:
       - ./backend/node_modules:/usr/app/node_modules
     ports:
       - "3000:3000"
-    environment:
-      - DB_HOST=db
     env_file:
       .env.dev
+    depends_on:
+      - db
+    networks:
+      - wikideas-network
   db:
     image: mongo
     restart: unless-stopped
     volumes:
-      - db_data:/data/db
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
     env_file:
       .env.dev
-volumes:
-  db_data:
+    ports:
+      - '27017:27017'
+    networks:
+      - wikideas-network
+
+networks:
+  wikideas-network:
+    driver: bridge
