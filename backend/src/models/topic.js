@@ -12,13 +12,7 @@ const topicSchema = new mongoose.Schema({
         minLength: 1,
         required: true
     },
-    created_at: {
-        type: Date, default: Date.now()
-    },
-    modified_at: {
-        type: Date, default: Date.now()
-    },
-});
+}, {timestamps: true});
 
 const Topic = mongoose.model('Topic', topicSchema);
 export default Topic;
