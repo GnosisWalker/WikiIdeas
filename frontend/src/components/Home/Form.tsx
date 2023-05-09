@@ -3,7 +3,7 @@ import {faBookOpenReader, faHandsHolding, faUsers} from "@fortawesome/free-solid
 import './Form.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
-const Form: React.FC<any> = () => {
+const Form: React.FC<{ className: string }> = ({className}) => {
   const [selected, setSelected] = useState(0);
   const data = [
     {
@@ -24,11 +24,15 @@ const Form: React.FC<any> = () => {
   ];
 
   return (
-    <div className="home__form">
+    <div className={`home__form ${className}`}>
       <div className="nav">
         {
           data.map((item, index) =>
-            <div className={`navItem ${index === selected ? 'selected' : ''}`} onClick={() => setSelected(index)}>
+            <div
+              key={index}
+              className={`navItem ${index === selected ? 'selected' : ''}`}
+              onClick={() => setSelected(index)}
+            >
               <FontAwesomeIcon icon={item.icon}/>
               {item.title}
             </div>
