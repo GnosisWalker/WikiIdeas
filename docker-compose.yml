@@ -1,5 +1,17 @@
 version: '3.8'
 services:
+  nginx:
+    build:
+      context: .
+      dockerfile: nginx.Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+      - server
+    networks:
+      - wikideas-network
+
   server:
     build:
       context: ./backend

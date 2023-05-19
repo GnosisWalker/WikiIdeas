@@ -3,9 +3,9 @@ FROM node:18.16.0-alpine
 WORKDIR /usr/app
 
 COPY package*.json ./
-RUN npm i -qy
+RUN npm ci -qy
 
-COPY ./src .
+COPY src .
 
 EXPOSE 3000
 
